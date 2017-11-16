@@ -1,0 +1,53 @@
+version: '2'
+services:
+
+  # Front-end App
+  # my-hn-app:
+  #   image: my-hn-react-app
+  #   ports:
+  #     - '7851:80'
+
+  # API - Node.js Implementation
+  # my-hn-api:
+  #   image: my-hn-api-node-js
+  #   ports:
+  #     - '7852:80'
+
+  # API - Python Implementation
+  # my-hn-api:
+  #   image: my-hn-api-python
+  #   ports:
+  #     - '7852:80'
+
+  # API - Scala Implementation
+  # my-hn-api:
+  #   image: my-hn-api-scala
+  #   ports:
+  #     - '7852:80'
+
+  # MySQL
+  my-hn-mysql:
+    image: mysql:5.7
+    ports:
+      - '7853:3306'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myhn
+    volumes:
+      - './volumes/mysql:/var/lib/mysql'
+
+  # Elasticsearch
+  my-hn-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.4
+    ports:
+      - '7854:9200'
+    volumes:
+      - ./volumes/elasticsearch:/usr/share/elasticsearch/data
+
+  # Redis
+  my-hn-redis:
+    image: redis:2
+    command: redis-server --appendonly yes --requirepass ahr098gi3refjd
+    ports:
+      - '7855:6379'
