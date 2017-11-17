@@ -10,18 +10,13 @@ fi
 
 # Exit if node is not installed or not version 9.*
 if [[ ! $(node --version) == v9* ]] ; then
-    echo "Node version is NOT v9.*"
-    echo "Exiting..."
+    echo "WARNING: Node version is NOT v9.*"
 fi
 
 # Exit if docker is not installed or not version 17.*
 if [[ ! $(docker --version) == "Docker version 17."* ]] ; then
-    echo "Docker version is NOT v17.*"
-    echo "Exiting..."
+    echo "WARNING: Docker version is NOT v17.*"
 fi
-
-# TODO: check docker is installed and consider checking the version
-# TODO: warn if R is not installed
 
 cd repos
 
