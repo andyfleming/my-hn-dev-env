@@ -21,7 +21,7 @@ fi
 cd repos
 
 #REPOS=( "my-hn-spec" "my-hn-app-react" )
-REPOS=( "my-hn-spec" )
+REPOS=( "my-hn-project" "my-hn-api-node-js" "my-hn-app-vanilla-js" "my-hn-tests" "my-hn-crawler-importer-node-js" )
 
 for r in "${REPOS[@]}"
 do
@@ -31,8 +31,20 @@ do
     [ ! -d "./$r" ] && echo "Repository $r not found. Cloning..." && git clone git@github.com:andyfleming/$r.git
     [ -d "./$r" ] && printf "\xE2\x9C\x94  $r is already cloned.\n"
 
-    # Run build script if there is one
-    [ -e "./$r/bin/build.sh" ] && echo "Running build script..." && ./$r/bin/build.sh
+    echo ""
+
+    # Change into the directory
+    cd $r
+
+    # Run the project build script if there is one
+    [ -e "./bin/build.sh" ] && echo "Running build script..." && ./bin/build.sh
+
+    # Build and tag the docker container (if a Dockerfile is present)
+    [[ -f Dockerfile ]] && docker build -t andyfleming/$r .
+
+    # Exit the directory
+    cd ..
+
 done
 
 echo ""
