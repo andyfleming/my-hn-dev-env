@@ -8,4 +8,8 @@ Read more about MyHN project here: [andyfleming/my-hn-project](https://github.co
 
 ## Usage
 
-Visit [localhost:7851](http://localhost:7851/).
+**Running the app**
+
+1. Clone and build all projects automatically by running `./bin/build.sh`
+2. Run `docker-compose up`
+3. Visit [localhost:7851](http://localhost:7851/).
